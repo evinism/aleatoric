@@ -10,13 +10,26 @@ var handle = function(eventName, el, cback) {
     cback(event, el);
   }, true);
 };
-var toggleBtn = byId("toggle");
-handle("mousedown", toggleBtn, function(event, el) {
-  env.enabled = !env.enabled;
-  el.value = el.getAttribute(env.enabled ? 'data-off' : 'data-on');
-});
 
-toggleBtn.value = toggleBtn.getAttribute(env.enabled ? 'data-off' : 'data-on');
+// Initialize the toggle button 
+var toggleBtn = byId("enable-aleatoric");
+handle("click", toggleBtn, function(event, el) {
+  env.enabled = el.checked;
+});
+toggleBtn.checked = env.enabled;
+// End initialize the toggle button
+
+// Initialize the toggle button for active tabs 
+var currentTabBtn = byId("current-tab");
+handle("click", currentTabBtn, function(event, el) {
+  env.onlyForActiveTab = el.checked;
+  if (env.onlyForActiveTab) {
+    bgPage.quickKillAllRings(env);
+  }
+});
+currentTabBtn.checked = env.onlyForActiveTab;
+// End initialize the toggle button
+
 
 var volume = byId("volume");
 volume.value = env.gain.gain.value;
@@ -61,8 +74,8 @@ function makeWhitelistEntry(hostname){
   var btn = document.createElement('button');
   btn.innerHTML = 'x';
   var li = document.createElement('li');
-  li.appendChild(btn)
   li.appendChild(text);
+  li.appendChild(btn)
   handle('click', btn, function(){
     removeWhitelistEntry(li, hostname);
   });

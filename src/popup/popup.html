@@ -6,21 +6,44 @@
   </head>
   <body>
     <div id="cover">
+      <h3 class="header-bar">Aleatory</h3>
       <div id="controls">
-        <input id="toggle" type="button" value="Make noise" data-on="Make noise" data-off="Be quiet" style="margin-bottom:15px"/>
-        <input id="volume" type="range" min="0.01" max="2.0" step="any" value="1.0"/>
-        <div id="request-types">
+        <div class="control-item">
+          <label class="switch">
+            <span class="label-text">Enabled</span>
+            <input id="enable-aleatoric" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="control-item">
+          <label id="volume-control">
+            <span class="label-text">Volume</span>
+            <input id="volume" type="range" min="0.01" max="2.0" step="any" value="1.0"/>
+          </label>
+        </div>
+        <div class="control-item">
+          <label class="switch">
+            <span class="label-text">Restrict sound to Current Tab</span>
+            <input id="current-tab" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div id="filters" class="control-item">
+          <h3>Request URL includes string</h3>
+          <ul id="whitelist">
+          </ul>
+          <form id="whitelist-adder">
+            <input type="text">
+            <input type="submit" value="add">
+          </form>
+        </div>
+        <div class="control-item">
+          <details>
+            <summary>Example Sounds</summary>
+            <div id="request-types"></div>
+          </details>
         </div>
       </div>
-    </div>
-    <div id="filters">
-      <h3>request url includes string:</h3>
-      <ul id="whitelist">
-      </ul>
-      <form id="whitelist-adder">
-        <input type="text">
-        <input type="submit" value="add to whitelist">
-      </form>
     </div>
   </body>
   <script src="popup.js"></script>
