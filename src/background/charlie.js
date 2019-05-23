@@ -52,7 +52,8 @@ function onlyForActiveTab(fn, env){
   }
 };
 
-chrome.tabs.onActivated.addListener(function(){
+chrome.tabs.onActivated.addListener(function(tabDetails){
+  env.tabId = tabDetails.tabId;
   if(env.onlyForActiveTab) {
     quickKillAllRings(env);
   }
