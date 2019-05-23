@@ -46,11 +46,7 @@ var permissions = { urls: ["*://*/*"] };
 
 function onlyForActiveTab(fn, env){
   return function(details){
-    if (env.onlyForActiveTab) {
-      chrome.tabs.get(details.tabId, (tab) => {
-        tab && tab.active && fn(details);
-      });
-    } else {
+    if (!env.onlyForActiveTab || (details.tabId === env.tabId)) {
       fn(details);
     }
   }
